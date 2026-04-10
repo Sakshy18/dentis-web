@@ -1,7 +1,5 @@
 import Image from "next/image";
 
-import { SiteHeader } from "@/components/layout/SiteHeader";
-
 const heroBackground = "/images/png/home-hero-bg.jpg";
 const avatarOne = "/images/png/home-hero-avatar-1.jpg";
 const avatarTwo = "/images/png/home-hero-avatar-2.jpg";
@@ -20,10 +18,6 @@ export function HomeHeroSection() {
           src={heroBackground}
         />
         <div className="absolute inset-0 bg-black/25" />
-      </div>
-
-      <div className="absolute left-1/2 top-[20px] z-20 w-[calc(100%-40px)] max-w-[1400px] -translate-x-1/2">
-        <SiteHeader />
       </div>
 
       <div className="absolute left-[40px] top-[522px] flex w-[calc(100%-80px)] max-w-[1360px] items-end justify-between">
