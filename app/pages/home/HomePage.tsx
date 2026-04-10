@@ -3,6 +3,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { HomeAboutSection } from "./sections/HomeAboutSection";
 import { HomeAboutStatsSection } from "./sections/HomeAboutStatsSection";
 import { HomeHeroSection } from "./sections/HomeHeroSection";
+import { HomeServiceSection } from "./sections/HomeServiceSection";
 
 export function HomePage() {
   return (
@@ -10,6 +11,7 @@ export function HomePage() {
       <HomeHeroSection />
       <HomeAboutStatsSection />
       <HomeAboutSection />
+      <HomeServiceSection />
       <SiteFooter />
     </div>
   );
