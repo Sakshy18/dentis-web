@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 
 import { HomeAboutSection } from "./sections/HomeAboutSection";
 import { HomeAboutStatsSection } from "./sections/HomeAboutStatsSection";
+import { HomeDoctorsSection } from "./sections/HomeDoctorsSection";
 import { HomeHeroSection } from "./sections/HomeHeroSection";
 import { HomeServiceSection } from "./sections/HomeServiceSection";
 
@@ -18,6 +19,7 @@ export function HomePage() {
       <HomeAboutStatsSection />
       <HomeAboutSection />
       <HomeServiceSection />
+      <HomeDoctorsSection />
       <SiteFooter />
     </div>
   );

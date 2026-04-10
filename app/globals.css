@@ -21,6 +21,7 @@
   /* Semantic aliases */
   --background-white-0: var(--neutral-25);
   --background-weak-50: var(--neutral-50);
+  --background-soft-200: var(--neutral-200);
   --background-primary-700: var(--primary-700);
   --button-primary-base: #3131d8;
   --text-white-0: var(--neutral-25);
