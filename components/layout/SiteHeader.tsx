@@ -1,12 +1,21 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const logoMark = "/images/svg/site-logo.svg";
 const caretDown = "/images/svg/caret-down.svg";
 
-const menuItems = ["Home", "Service", "Doctor", "About Us", "Blog", "Career"];
+const menuItems = [
+  { label: "Home", href: "/pages/home" },
+  { label: "Service", href: "/pages/services", hasCaret: true },
+  { label: "Doctor", href: "/pages/home#doctors" },
+  { label: "About Us", href: "/pages/about" },
+  { label: "Blog", href: "#" },
+  { label: "Career", href: "#" },
+];
 
 type SiteHeaderProps = {
   mobileOverlay?: boolean;
@@ -15,6 +24,12 @@ type SiteHeaderProps = {
 
 export function SiteHeader({ mobileOverlay = false, mobilePanel = false }: SiteHeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isPathActive = (href: string) => {
+    if (!href.startsWith("/")) return false;
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   return (
     <div className="relative">
@@ -29,30 +44,31 @@ export function SiteHeader({ mobileOverlay = false, mobilePanel = false }: SiteH
           className="flex items-center gap-[8px] rounded-[8px]"
           style={mobileOverlay ? { ["--fill-0" as string]: "#FFFFFF" } : undefined}
         >
-          <Image alt="Dentis logo" className="h-4 w-4" height={16} src={logoMark} width={16} />
-          <p
-            className={`text-[18px] font-medium leading-[1.6] tracking-[-0.36px] ${
-              mobileOverlay ? "text-[var(--text-white-0)] lg:text-[var(--text-strong-950)]" : "text-[var(--text-strong-950)]"
-            }`}
-          >
-            Dentis
-          </p>
+          <Link className="flex items-center gap-[8px]" href="/pages/home">
+            <Image alt="Dentis logo" className="h-4 w-4" height={16} src={logoMark} width={16} />
+            <p
+              className={`text-[18px] font-medium leading-[1.6] tracking-[-0.36px] ${
+                mobileOverlay ? "text-[var(--text-white-0)] lg:text-[var(--text-strong-950)]" : "text-[var(--text-strong-950)]"
+              }`}
+            >
+              Dentis
+            </p>
+          </Link>
         </div>
 
         <div className="hidden items-center justify-center gap-[24px] rounded-[8px] px-[4px] py-[7px] lg:flex xl:gap-[32px]">
           {menuItems.map((item) => {
-            const isActive = item === "Home";
-            const isService = item === "Service";
+            const isActive = isPathActive(item.href);
             return (
-              <a
-                key={item}
+              <Link
+                key={item.label}
                 className={`flex items-center gap-[8px] text-[16px] font-medium leading-[1.6] tracking-[-0.32px] ${
                   isActive ? "text-[var(--text-strong-950)]" : "text-[var(--text-sub-500)]"
                 }`}
-                href="#"
+                href={item.href}
               >
-                {item}
-                {isService ? (
+                {item.label}
+                {item.hasCaret ? (
                   <span className="flex h-5 w-5 items-center justify-center">
                     <Image
                       alt=""
@@ -64,7 +80,7 @@ export function SiteHeader({ mobileOverlay = false, mobilePanel = false }: SiteH
                     />
                   </span>
                 ) : null}
-              </a>
+              </Link>
             );
           })}
         </div>
@@ -97,17 +113,19 @@ export function SiteHeader({ mobileOverlay = false, mobilePanel = false }: SiteH
 
       {mobilePanel && isMenuOpen ? (
         <div className="absolute left-0 right-0 top-[76px] z-50 rounded-[20px] border border-[var(--stroke-soft-200)] bg-[var(--background-white-0)] p-[20px] shadow-[0_10px_24px_rgba(0,0,0,0.08)] lg:hidden">
-          <div className="flex flex-col">
-            {menuItems.map((item) => (
-              <a
-                key={item}
-                className="rounded-[10px] px-[12px] py-[10px] text-[16px] font-medium leading-[1.6] tracking-[-0.32px] text-[var(--text-strong-950)]"
-                href="#"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item}
-              </a>
-            ))}
+            <div className="flex flex-col">
+              {menuItems.map((item) => (
+                <Link
+                  key={item.label}
+                  className={`rounded-[10px] px-[12px] py-[10px] text-[16px] font-medium leading-[1.6] tracking-[-0.32px] ${
+                    isPathActive(item.href) ? "text-[var(--text-strong-950)]" : "text-[var(--text-sub-500)]"
+                  }`}
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
             <button className="mt-[12px] rounded-[99999px] bg-[var(--button-primary-base)] px-[18px] py-[9px] text-[14px] font-medium leading-[1.6] tracking-[-0.28px] text-[var(--text-white-0)]">
               Contact Us
             </button>
