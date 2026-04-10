@@ -35,9 +35,9 @@ const caretRight = "/images/svg/home-service-caret-right.svg";
 
 export function HomeServiceSection() {
   return (
-    <section className="h-[1624px] w-full bg-[var(--background-weak-50)] px-[56px] py-[104px]">
-      <div className="mx-auto flex h-full w-full max-w-[1328px] flex-col items-center gap-[56px]">
-        <div className="w-[712px]">
+    <section className="bg-[var(--background-weak-50)] px-[20px] py-[72px] sm:px-[40px] sm:py-[88px] lg:px-[56px] lg:py-[104px]">
+      <div className="mx-auto flex w-full max-w-[1328px] flex-col items-center gap-[56px]">
+        <div className="w-full max-w-[712px]">
           <div className="mx-auto flex w-fit items-center gap-[8px] rounded-[50px] border border-[var(--primary-700)] px-[16px] py-[4px]">
             <span className="text-[20px] font-normal leading-[1.6] tracking-[-0.4px] text-[var(--primary-700)]">
               •
@@ -48,43 +48,41 @@ export function HomeServiceSection() {
           </div>
 
           <div className="mt-[16px] text-center">
-            <p className="text-[40px] font-medium leading-[1.4] tracking-[-0.8px] text-[var(--text-strong-950)]">
+            <p className="text-[34px] font-medium leading-[1.4] tracking-[-0.68px] text-[var(--text-strong-950)] sm:text-[40px] sm:tracking-[-0.8px]">
               Comprehensive
             </p>
-            <p className="text-[40px] font-medium leading-[1.4] tracking-[-0.8px] text-[var(--text-strong-950)]">
+            <p className="text-[34px] font-medium leading-[1.4] tracking-[-0.68px] text-[var(--text-strong-950)] sm:text-[40px] sm:tracking-[-0.8px]">
               Care for Every Smile
             </p>
-            <p className="mt-[8px] text-[20px] font-normal leading-[1.6] tracking-[-0.4px] text-[var(--text-sub-500)]">
+            <p className="mt-[8px] text-[18px] font-normal leading-[1.6] tracking-[-0.36px] text-[var(--text-sub-500)] sm:text-[20px] sm:tracking-[-0.4px]">
               We provide all-around care designed to keep every smile healthy,
               confident, and cared for at every stage.
             </p>
           </div>
         </div>
 
-        <div className="flex w-[868px] flex-col gap-[32px]">
+        <div className="flex w-full max-w-[868px] flex-col gap-[20px] sm:gap-[24px] lg:gap-[32px]">
           {serviceItems.map((item) => (
             <article
               key={item.title}
-              className="flex h-[256px] w-[868px] items-center gap-[8px] rounded-[16px] bg-[var(--background-white-0)]"
+              className="grid gap-[8px] rounded-[16px] bg-[var(--background-white-0)] p-[8px] md:grid-cols-2"
             >
-              <div className="relative h-full min-w-0 flex-1 overflow-hidden rounded-[16px] bg-[var(--background-primary-700)]">
-                <div className="absolute bottom-0 left-0 right-0 h-[645px]">
+              <div className="relative h-[220px] min-w-0 overflow-hidden rounded-[16px] bg-[var(--background-primary-700)] sm:h-[256px]">
+                <div className="absolute inset-x-0 bottom-0 h-[120%]">
                   <Image
                     alt=""
                     className={`h-full w-full ${item.imageClass}`}
                     fill
-                    sizes="430px"
+                    sizes="(max-width: 768px) 100vw, 430px"
                     src={item.image}
                   />
                 </div>
               </div>
 
-              <div className="flex h-full min-w-0 flex-1 flex-col items-start gap-[32px] rounded-[10px] p-[24px]">
+              <div className="flex min-w-0 flex-col items-start justify-between gap-[24px] rounded-[10px] p-[16px] sm:p-[24px]">
                 <div className="w-full">
-                  <h3 className="text-[34px] font-medium leading-0 tracking-0 text-[var(--text-strong-950)]">
-                    <span className="text-[24px] leading-[1.4] tracking-[-0.48px]">
-                      {item.title}
-                    </span>
+                  <h3 className="text-[24px] font-medium leading-[1.4] tracking-[-0.48px] text-[var(--text-strong-950)]">
+                    {item.title}
                   </h3>
                   <p className="mt-[12px] text-[16px] font-normal leading-[1.6] tracking-[-0.32px] text-[var(--text-sub-500)]">
                     {item.description}

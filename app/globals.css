@@ -17,6 +17,7 @@
 
   /* Primary */
   --primary-700: #191985;
+  --primary-800: #12125c;
 
   /* Semantic aliases */
   --background-white-0: var(--neutral-25);
@@ -27,6 +28,7 @@
   --text-white-0: var(--neutral-25);
   --text-strong-950: var(--neutral-950);
   --text-sub-500: var(--neutral-500);
+  --text-soft-400: var(--neutral-400);
   --text-disable-300: var(--neutral-300);
   --stroke-soft-200: var(--neutral-200);
 
@@ -66,4 +68,30 @@ body {
   background: var(--background-white-0);
   color: var(--text-strong-950);
   font-family: var(--font-inter), sans-serif;
+}
+
+@keyframes testimonials-marquee-loop {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-1 * var(--loop-distance, 1000px)));
+  }
+}
+
+.home-testimonials-marquee {
+  animation: testimonials-marquee-loop var(--loop-duration, 24s) linear infinite;
+  will-change: transform;
+}
+
+.home-testimonials-marquee-mobile {
+  animation: testimonials-marquee-loop var(--loop-duration, 18s) linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-testimonials-marquee,
+  .home-testimonials-marquee-mobile {
+    animation: none;
+  }
 }
