@@ -106,19 +106,19 @@ export function AboutGallerySection() {
                     : "scale-[0.94]"
                 }`}
               >
+                <Image
+                  alt={slide.alt}
+                  className="object-cover"
+                  fill
+                  sizes="(max-width: 640px) 86vw, (max-width: 1024px) 86vw, 920px"
+                  src={slide.image}
+                />
                 <div
-                  className={`absolute inset-0 overflow-hidden rounded-[16px] border-[10px] border-[var(--background-soft-200)] transition-opacity duration-300 ${
+                  aria-hidden
+                  className={`pointer-events-none absolute inset-0 rounded-[16px] border-[10px] border-[var(--background-soft-200)] transition-opacity duration-300 ${
                     isActive ? "opacity-100" : "opacity-0"
                   }`}
-                >
-                  <Image
-                    alt={slide.alt}
-                    className="object-cover"
-                    fill
-                    sizes="(max-width: 640px) 86vw, (max-width: 1024px) 86vw, 920px"
-                    src={slide.image}
-                  />
-                </div>
+                />
               </article>
             );
           })}
