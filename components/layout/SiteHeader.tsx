@@ -35,6 +35,7 @@ export function SiteHeader({ mobileOverlay = false, mobilePanel = false }: SiteH
   };
 
   const isServicesPath = pathname === "/pages/services" || pathname.startsWith("/pages/services/");
+  const isContactPath = pathname === "/pages/contact" || pathname.startsWith("/pages/contact/");
 
   useEffect(() => {
     setIsServiceDropdownOpen(false);
@@ -139,14 +140,24 @@ export function SiteHeader({ mobileOverlay = false, mobilePanel = false }: SiteH
             </span>
           </button>
         ) : (
-          <button className="rounded-[99999px] border border-[var(--stroke-soft-200)] bg-[var(--background-white-0)] px-[14px] py-[9px] text-[14px] font-medium leading-[1.6] tracking-[-0.28px] text-[var(--text-strong-950)] sm:px-[18px]">
+          <Link
+            className="rounded-[99999px] border border-[var(--stroke-soft-200)] bg-[var(--background-white-0)] px-[14px] py-[9px] text-[14px] font-medium leading-[1.6] tracking-[-0.28px] text-[var(--text-strong-950)] sm:px-[18px]"
+            href="/pages/contact"
+          >
             Contact Us
-          </button>
+          </Link>
         )}
 
-        <button className="hidden rounded-[99999px] border border-[var(--stroke-soft-200)] bg-[var(--background-white-0)] px-[14px] py-[9px] text-[14px] font-medium leading-[1.6] tracking-[-0.28px] text-[var(--text-strong-950)] lg:block lg:px-[18px]">
+        <Link
+          className={`hidden rounded-[99999px] border px-[14px] py-[9px] text-[14px] font-medium leading-[1.6] tracking-[-0.28px] lg:block lg:px-[18px] ${
+            isContactPath
+              ? "border-[var(--button-primary-base)] bg-[var(--button-primary-base)] text-[var(--text-white-0)]"
+              : "border-[var(--stroke-soft-200)] bg-[var(--background-white-0)] text-[var(--text-strong-950)]"
+          }`}
+          href="/pages/contact"
+        >
           Contact Us
-        </button>
+        </Link>
       </nav>
 
       {isServiceDropdownOpen ? (
@@ -252,9 +263,13 @@ export function SiteHeader({ mobileOverlay = false, mobilePanel = false }: SiteH
                   ) : null}
                 </div>
               ))}
-            <button className="mt-[12px] rounded-[99999px] bg-[var(--button-primary-base)] px-[18px] py-[9px] text-[14px] font-medium leading-[1.6] tracking-[-0.28px] text-[var(--text-white-0)]">
+            <Link
+              className="mt-[12px] rounded-[99999px] bg-[var(--button-primary-base)] px-[18px] py-[9px] text-center text-[14px] font-medium leading-[1.6] tracking-[-0.28px] text-[var(--text-white-0)]"
+              href="/pages/contact"
+              onClick={() => setIsMenuOpen(false)}
+            >
               Contact Us
-            </button>
+            </Link>
           </div>
         </div>
       ) : null}
