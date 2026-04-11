@@ -2,8 +2,8 @@ import Image from "next/image";
 
 const aboutStoryLeftDesktop = "/images/png/about-story-left-desktop.jpg";
 const aboutStoryRightDesktop = "/images/png/about-story-right-desktop.jpg";
-const aboutStoryLeftMobile = "/images/png/about-story-left-mobile.jpg";
-const aboutStoryRightMobile = "/images/png/about-story-right-mobile.jpg";
+const aboutStoryLeftMobile = aboutStoryLeftDesktop;
+const aboutStoryRightMobile = aboutStoryRightDesktop;
 
 function AboutStoryColumn({
   title,

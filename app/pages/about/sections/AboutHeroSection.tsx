@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const aboutHeroDesktop = "/images/png/about-hero-desktop.jpg";
-const aboutHeroMobile = "/images/png/about-hero-mobile.jpg";
+const aboutHeroMobile = aboutHeroDesktop;
 
 export function AboutHeroSection() {
   return (
