@@ -12,7 +12,7 @@ const caretDown = "/images/svg/caret-down.svg";
 const menuItems = [
   { label: "Home", href: "/pages/home" },
   { label: "Service", href: "/pages/services", hasCaret: true },
-  { label: "Doctor", href: "/pages/home#doctors" },
+  { label: "Doctor", href: "/pages/doctors" },
   { label: "About Us", href: "/pages/about" },
   { label: "Blog", href: "#" },
   { label: "Career", href: "#" },

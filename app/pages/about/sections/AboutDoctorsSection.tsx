@@ -1,57 +1,13 @@
 import { DoctorCard, type DoctorCardProps } from "@/components/layout/DoctorCard";
+import { doctors as doctorsData } from "@/app/pages/doctors/data/doctors";
 
-const doctors: DoctorCardProps[] = [
-  {
-    role: "General Dentist",
-    name: "Dr. Joanne Rider",
-    desktopImage: "/images/png/about-doctor-1-desktop.jpg",
-    mobileImage: "/images/png/about-doctor-1-desktop.jpg",
-  },
-  {
-    role: "Pediatric Dentist",
-    name: "Dr. Johnny Haesworth",
-    desktopImage: "/images/png/about-doctor-2-desktop.jpg",
-    mobileImage: "/images/png/about-doctor-2-desktop.jpg",
-  },
-  {
-    role: "Orthodontics Specialist",
-    name: "Dr. Rachel Watson",
-    desktopImage: "/images/png/about-doctor-3-desktop.jpg",
-    mobileImage: "/images/png/about-doctor-3-desktop.jpg",
-  },
-  {
-    role: "Oral Health & Preventive Care Dentist",
-    name: "Dr. Mark Leverton",
-    desktopImage: "/images/png/about-doctor-4-desktop.jpg",
-    mobileImage: "/images/png/about-doctor-4-desktop.jpg",
-    roleSmall: true,
-  },
-  {
-    role: "Oral Health & Preventive Care Dentist",
-    name: "Dr. Renard J. Starks",
-    desktopImage: "/images/png/about-doctor-5-desktop.jpg",
-    mobileImage: "/images/png/about-doctor-5-desktop.jpg",
-    roleSmall: true,
-  },
-  {
-    role: "General Dentist",
-    name: "Dr. Haerin Cole",
-    desktopImage: "/images/png/about-doctor-6-desktop.jpg",
-    mobileImage: "/images/png/about-doctor-6-desktop.jpg",
-  },
-  {
-    role: "Pediatric Dentist",
-    name: "Dr. Ren Junichi",
-    desktopImage: "/images/png/about-doctor-7-desktop.jpg",
-    mobileImage: "/images/png/about-doctor-7-desktop.jpg",
-  },
-  {
-    role: "Orthodontics Specialist",
-    name: "Dr. Marcella Lee",
-    desktopImage: "/images/png/about-doctor-8-desktop.jpg",
-    mobileImage: "/images/png/about-doctor-8-desktop.jpg",
-  },
-];
+const doctors: DoctorCardProps[] = doctorsData.map((doctor) => ({
+  role: doctor.role,
+  name: doctor.name,
+  desktopImage: doctor.desktopImage,
+  mobileImage: doctor.mobileImage,
+  roleSmall: doctor.roleSmall,
+}));
 
 export function AboutDoctorsSection() {
   return (
