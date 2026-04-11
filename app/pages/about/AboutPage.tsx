@@ -6,6 +6,7 @@ import { AboutFounderSection } from "./sections/AboutFounderSection";
 import { AboutGallerySection } from "./sections/AboutGallerySection";
 import { AboutHeroSection } from "./sections/AboutHeroSection";
 import { AboutStorySection } from "./sections/AboutStorySection";
+import { ScheduleSection } from "@/components/ui/ScheduleSection";
 
 export function AboutPage() {
   return (
@@ -22,6 +23,7 @@ export function AboutPage() {
         <AboutFounderSection />
         <WhyChooseUs />
         <AboutGallerySection />
+        <ScheduleSection/>
       </main>
       <SiteFooter />
     </div>
