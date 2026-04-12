@@ -1,0 +1,147 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e5]:
+      - link "Dentis logo Dentis" [ref=e7] [cursor=pointer]:
+        - /url: /pages/home
+        - img "Dentis logo" [ref=e8]
+        - paragraph [ref=e9]: Dentis
+      - generic [ref=e10]:
+        - link "Home" [ref=e11] [cursor=pointer]:
+          - /url: /pages/home
+        - button "Service" [ref=e12]:
+          - text: Service
+          - img [ref=e14]
+        - link "Doctor" [ref=e15] [cursor=pointer]:
+          - /url: /pages/doctors
+        - link "About Us" [ref=e16] [cursor=pointer]:
+          - /url: /pages/about
+        - link "Blog" [ref=e17] [cursor=pointer]:
+          - /url: "#"
+        - link "Career" [ref=e18] [cursor=pointer]:
+          - /url: /pages/careers
+      - link "Contact Us" [ref=e19] [cursor=pointer]:
+        - /url: /pages/contact
+    - main [ref=e20]:
+      - generic [ref=e21]:
+        - img "Dental clinic treatment room" [ref=e23]
+        - generic [ref=e24]:
+          - heading "About Us" [level=1] [ref=e25]
+          - paragraph [ref=e26]: At the heart of our clinic is a simple mission-to make high-quality dental care accessible, comfortable, and tailored to you.
+      - generic [ref=e28]:
+        - generic [ref=e30]:
+          - heading "Driven by care, guided by integrity" [level=2] [ref=e31]
+          - paragraph [ref=e32]: Founded with a vision to provide reliable and compassionate dental care, our clinic began as a small practice dedicated to serving the local community.
+        - generic [ref=e35]:
+          - heading "Built on trust, care, and a passion" [level=2] [ref=e36]
+          - paragraph [ref=e37]: Over the years, we've grown-welcoming more patients, expanding our services, and embracing modern technology-while staying true to our roots.
+      - generic [ref=e40]:
+        - generic [ref=e41]:
+          - generic [ref=e42]:
+            - generic [ref=e43]: •
+            - generic [ref=e44]: Our Doctors
+          - generic [ref=e45]:
+            - heading "Experienced. Caring. Here for You." [level=2] [ref=e46]
+            - paragraph [ref=e47]: Our dentists are highly trained professionals dedicated to delivering gentle, thorough, and personalized care for every patient.
+        - generic [ref=e48]:
+          - article [ref=e49]:
+            - img "Dr. Joanne Rider" [ref=e51]
+            - generic [ref=e53]
+          - article [ref=e56]:
+            - img "Dr. Johnny Haesworth" [ref=e58]
+            - generic [ref=e60]
+          - article [ref=e63]:
+            - img "Dr. Rachel Watson" [ref=e65]
+            - generic [ref=e67]
+          - article [ref=e70]:
+            - img "Dr. Mark Leverton" [ref=e72]
+            - generic [ref=e74]
+          - article [ref=e77]:
+            - img "Dr. Renard J. Starks" [ref=e79]
+            - generic [ref=e81]
+          - article [ref=e84]:
+            - img "Dr. Haerin Cole" [ref=e86]
+            - generic [ref=e88]
+          - article [ref=e91]:
+            - img "Dr. Ren Junichi" [ref=e93]
+            - generic [ref=e95]
+          - article [ref=e98]:
+            - img "Dr. Marcella Lee" [ref=e100]
+            - generic [ref=e102]
+      - generic [ref=e105]:
+        - generic:
+          - img
+        - generic [ref=e106]:
+          - generic [ref=e107]:
+            - generic [ref=e108]: •
+            - generic [ref=e109]: Founder Says
+          - heading "Our vision is create a place where patients feel genuinely cared for, and leave with confidence in their smile." [level=2] [ref=e110]
+          - generic [ref=e111]:
+            - img "Dr. Mark Leverton" [ref=e114]
+            - generic [ref=e115]
+      - generic [ref=e119]:
+        - generic [ref=e120]:
+          - generic [ref=e121]:
+            - generic [ref=e122]: •
+            - generic [ref=e123]: Why Choose Us
+          - generic [ref=e124]:
+            - paragraph [ref=e125]: Care That Puts You First
+            - generic [ref=e126]
+        - generic [ref=e129]:
+          - generic [ref=e132]:
+            - heading "Expertise You Can Feel Confident In" [level=3] [ref=e133]
+            - paragraph [ref=e134]: Our dentists bring years of clinical expertise and continuous training to ensure every treatment is safe, precise, and effective.
+          - generic [ref=e135]:
+            - article [ref=e136]
+            - article [ref=e143]
+            - article [ref=e150]
+      - generic [ref=e159]:
+        - article [ref=e160]:
+          - img "Dental clinic equipment detail" [ref=e161]
+        - article [ref=e162]:
+          - img "Dental clinic equipment detail" [ref=e163]
+        - article [ref=e164]:
+          - img "Modern dental treatment room" [ref=e165]
+        - article [ref=e166]:
+          - img "Dental clinic equipment detail" [ref=e167]
+        - article [ref=e168]:
+          - img "Dental clinic equipment detail" [ref=e169]
+      - generic [ref=e172]:
+        - generic [ref=e173]:
+          - img "Dental visit" [ref=e174]
+          - generic [ref=e177]:
+            - heading "Book Your Visit Today" [level=3] [ref=e178]
+            - paragraph [ref=e179]: Select the time that works best for you. Our team is here to make every visit smooth and worry-free.
+        - generic [ref=e180]:
+          - generic [ref=e181]:
+            - img "Dentis mark" [ref=e182]
+            - heading "Schedule Dental Care" [level=4] [ref=e183]
+          - generic [ref=e184]:
+            - generic [ref=e185]
+            - generic [ref=e188]
+            - generic [ref=e191]
+            - generic [ref=e195]
+            - button "Book a Schedule" [ref=e199]
+    - contentinfo [ref=e200]:
+      - generic [ref=e201]:
+        - generic [ref=e202]:
+          - generic [ref=e203]:
+            - heading "Menu" [level=2] [ref=e204]
+            - generic [ref=e205]
+          - generic [ref=e213]:
+            - heading "Service" [level=2] [ref=e214]
+            - generic [ref=e215]
+          - generic [ref=e220]:
+            - heading "Legal" [level=2] [ref=e221]
+            - generic [ref=e222]
+        - generic [ref=e226]:
+          - generic [ref=e227]:
+            - generic [ref=e228]
+            - paragraph [ref=e231]: All rights reserved
+          - generic [ref=e232]:
+            - paragraph [ref=e233]: Local Time
+            - paragraph [ref=e234]: "08 : 25 : 16 AM"
+            - paragraph [ref=e235]: (GMT + 9)
+          - paragraph [ref=e236]: 430 Gyeongin-ro, Guro District, Seoul, South Korea
+  - button "Open Next.js Dev Tools" [ref=e242] [cursor=pointer]:
+    - img [ref=e243]
+  - alert [ref=e246]
