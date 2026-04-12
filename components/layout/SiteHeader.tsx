@@ -15,7 +15,7 @@ const menuItems = [
   { label: "Doctor", href: "/pages/doctors" },
   { label: "About Us", href: "/pages/about" },
   { label: "Blog", href: "#" },
-  { label: "Career", href: "#" },
+  { label: "Career", href: "/pages/careers" },
 ];
 
 type SiteHeaderProps = {
