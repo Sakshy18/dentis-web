@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { ServiceDetail } from "../../data/serviceDetails";
 
 const serviceCheckIcon = "/images/svg/service-check.svg";
@@ -10,15 +11,15 @@ type ServiceOverviewSectionProps = {
 export function ServiceOverviewSection({ service }: ServiceOverviewSectionProps) {
   return (
     <section className="bg-(--background-weak-50)">
-      <div className="mx-auto grid w-full max-w-[1312px] gap-[24px] px-[20px] py-[72px] sm:px-[40px] sm:py-[88px] lg:grid-cols-[535px_737px] lg:items-start lg:gap-[40px] lg:px-0 lg:py-[104px]">
-        <div className="relative h-[320px] overflow-hidden rounded-[16px] sm:h-[460px] lg:h-[732px]">
+      <div className="mx-auto grid w-full max-w-[1312px] gap-[24px] px-[20px] py-[72px] sm:px-[40px] sm:py-[88px] xl:grid-cols-[535px_737px] xl:items-start xl:gap-[40px] xl:px-0 xl:py-[104px]">
+        <div className="relative h-[320px] overflow-hidden rounded-[16px] sm:h-[460px] xl:h-[732px]">
           <Image
             alt={service.title}
             className={`h-full w-full ${service.overview.imageClass}`}
             fill
             loading="eager"
             priority
-            sizes="(max-width: 1023px) 100vw, 535px"
+            sizes="(max-width: 1279px) 100vw, 535px"
             src={service.overview.image}
           />
         </div>
@@ -65,9 +66,12 @@ export function ServiceOverviewSection({ service }: ServiceOverviewSectionProps)
                 Book your visit today!
               </p>
             </div>
-            <button className="h-[48px] rounded-[99999px] bg-(--button-primary-base) px-[22px] py-[11px] text-[16px] font-medium leading-[1.6] tracking-[-0.32px] text-(--text-white-0) sm:min-w-[220px] sm:flex-1">
-              Book a Schedule
-            </button>
+            <Link
+              className="flex h-[48px] items-center justify-center rounded-[99999px] bg-(--button-primary-base) px-[22px] py-[11px] text-[16px] font-medium leading-[1.6] tracking-[-0.32px] text-(--text-white-0) sm:min-w-[220px] sm:flex-1"
+              href="/pages/services/schedule-appointment"
+            >
+              Schedule Appointment
+            </Link>
           </div>
         </div>
       </div>

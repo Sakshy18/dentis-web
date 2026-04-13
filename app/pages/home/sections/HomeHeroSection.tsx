@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const heroBackground = "/images/png/home-hero-bg.jpg";
 const avatarOne = "/images/png/home-hero-avatar-1.jpg";
@@ -33,9 +34,12 @@ export function HomeHeroSection() {
           </p>
 
           <div className="flex items-center gap-[24px]">
-            <button className="rounded-[99999px] bg-[var(--button-primary-base)] px-[18px] py-[9px] text-[14px] font-medium leading-[1.6] tracking-[-0.28px] text-[var(--text-white-0)]">
+            <Link
+              className="rounded-[99999px] bg-[var(--button-primary-base)] px-[18px] py-[9px] text-[14px] font-medium leading-[1.6] tracking-[-0.28px] text-[var(--text-white-0)]"
+              href="/pages/services/schedule-appointment"
+            >
               Book a Schedule
-            </button>
+            </Link>
 
             <div className="flex min-w-0 flex-1 items-center gap-[12px]">
               <div className="flex items-center pr-[16px]">
@@ -80,9 +84,12 @@ export function HomeHeroSection() {
           </p>
 
           <div className="flex flex-wrap items-start gap-[24px] lg:gap-[40px]">
-            <button className="rounded-[99999px] bg-[var(--button-primary-base)] px-[26px] py-[13px] text-[16px] font-medium leading-[1.6] tracking-[-0.32px] text-[var(--text-white-0)]">
+            <Link
+              className="rounded-[99999px] bg-[var(--button-primary-base)] px-[26px] py-[13px] text-[16px] font-medium leading-[1.6] tracking-[-0.32px] text-[var(--text-white-0)]"
+              href="/pages/services/schedule-appointment"
+            >
               Book a Schedule
-            </button>
+            </Link>
 
             <div className="flex min-w-[220px] flex-1 items-center gap-[12px]">
               <div className="flex h-[48px] items-center pr-[16px]">

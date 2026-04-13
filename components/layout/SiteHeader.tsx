@@ -14,7 +14,7 @@ const menuItems = [
   { label: "Service", href: "/pages/services", hasCaret: true },
   { label: "Doctor", href: "/pages/doctors" },
   { label: "About Us", href: "/pages/about" },
-  { label: "Blog", href: "#" },
+  { label: "Blog", href: "/pages/blog" },
   { label: "Career", href: "/pages/careers" },
 ];
 
@@ -68,7 +68,7 @@ export function SiteHeader({ mobileOverlay = false, mobilePanel = false }: SiteH
           style={mobileOverlay ? { ["--fill-0" as string]: "#FFFFFF" } : undefined}
         >
           <Link className="flex items-center gap-[8px]" href="/pages/home">
-            <Image alt="Dentis logo" className="h-4 w-4" height={16} src={logoMark} width={16} />
+            <Image alt="Dentis logo" className="h-4 w-4" height={16} priority sizes="16px" src={logoMark} width={16} />
             <p
               className={`text-[18px] font-medium leading-[1.6] tracking-[-0.36px] ${
                 mobileOverlay ? "text-[var(--text-white-0)] lg:text-[var(--text-strong-950)]" : "text-[var(--text-strong-950)]"
@@ -141,7 +141,11 @@ export function SiteHeader({ mobileOverlay = false, mobilePanel = false }: SiteH
           </button>
         ) : (
           <Link
-            className="rounded-[99999px] border border-[var(--stroke-soft-200)] bg-[var(--background-white-0)] px-[14px] py-[9px] text-[14px] font-medium leading-[1.6] tracking-[-0.28px] text-[var(--text-strong-950)] sm:px-[18px]"
+            className={`rounded-[99999px] border px-[14px] py-[9px] text-[14px] font-medium leading-[1.6] tracking-[-0.28px] transition-colors sm:px-[18px] ${
+              isContactPath
+                ? "border-(--button-primary-base) bg-(--button-primary-base) text-(--text-white-0)"
+                : "border-(--stroke-soft-200) bg-(--background-white-0) text-(--text-strong-950) hover:border-(--button-primary-base) hover:bg-(--button-primary-base) hover:text-(--text-white-0)"
+            }`}
             href="/pages/contact"
           >
             Contact Us
@@ -149,10 +153,10 @@ export function SiteHeader({ mobileOverlay = false, mobilePanel = false }: SiteH
         )}
 
         <Link
-          className={`hidden rounded-[99999px] border px-[14px] py-[9px] text-[14px] font-medium leading-[1.6] tracking-[-0.28px] lg:block lg:px-[18px] ${
+          className={`hidden rounded-[99999px] border px-[14px] py-[9px] text-[14px] font-medium leading-[1.6] tracking-[-0.28px] transition-colors lg:block lg:px-[18px] ${
             isContactPath
               ? "border-[var(--button-primary-base)] bg-[var(--button-primary-base)] text-[var(--text-white-0)]"
-              : "border-[var(--stroke-soft-200)] bg-[var(--background-white-0)] text-[var(--text-strong-950)]"
+              : "border-[var(--stroke-soft-200)] bg-[var(--background-white-0)] text-[var(--text-strong-950)] hover:border-[var(--button-primary-base)] hover:bg-[var(--button-primary-base)] hover:text-[var(--text-white-0)]"
           }`}
           href="/pages/contact"
         >

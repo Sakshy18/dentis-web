@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { careerJobs } from "../data/jobs";
 
-const caretDownIcon = "/images/svg/careers-caret-down.svg";
+const caretDownIcon = "/images/svg/caret-down.svg";
 const magnifyingGlassIcon = "/images/svg/careers-magnifying-glass.svg";
 const salaryIcon = "/images/svg/careers-salary.svg";
 const briefcaseIcon = "/images/svg/careers-briefcase.svg";

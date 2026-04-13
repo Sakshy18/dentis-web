@@ -1,25 +1,31 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const copyrightIcon = "/images/svg/footer-copyright-icon.svg";
 
 const menuLinks = [
-  "Home",
-  "About Us",
-  "Service",
-  "Doctor",
-  "Blog",
-  "Career",
-  "Contact",
-];
+  { label: "Home", href: "/pages/home" },
+  { label: "About Us", href: "/pages/about" },
+  { label: "Service", href: "/pages/services" },
+  { label: "Doctor", href: "/pages/doctors" },
+  { label: "Blog", href: "/pages/blog" },
+  { label: "Career", href: "/pages/careers" },
+  { label: "Contact", href: "/pages/contact" },
+] as const;
 
 const serviceLinks = [
-  "Routine Check-Ups & Cleanings",
-  "Whitening & Aesthetic Services",
-  "Fillings, Crowns & Restorations",
-  "Braces & Clear Aligners",
-];
+  { label: "Schedule Appointment", href: "/pages/services/schedule-appointment" },
+  { label: "Routine Check-Ups & Cleanings", href: "/pages/services/routine-checkups-cleanings" },
+  { label: "Whitening & Aesthetic Services", href: "/pages/services/whitening-aesthetic-services" },
+  { label: "Fillings, Crowns & Restorations", href: "/pages/services/fillings-crowns-restorations" },
+  { label: "Braces & Clear Aligners", href: "/pages/services/braces-clear-aligners" },
+] as const;
 
-const legalLinks = ["Privacy Policy", "Terms and Condition", "404 not found"];
+const legalLinks = [
+  { label: "Privacy Policy", href: "/pages/privacy-policy" },
+  { label: "Terms and Condition", href: "/pages/terms-and-condition" },
+  { label: "404 not found", href: "/pages/404-not-found" },
+];
 
 export function SiteFooter() {
   return (
@@ -32,9 +38,9 @@ export function SiteFooter() {
             </h2>
             <div className="flex flex-col gap-[12px] text-[16px] font-normal leading-[1.6] tracking-[-0.32px] text-[var(--text-disable-300)]">
               {menuLinks.map((item) => (
-                <a key={item} href="#">
-                  {item}
-                </a>
+                <Link className="transition-colors hover:text-[var(--text-white-0)]" key={item.label} href={item.href}>
+                  {item.label}
+                </Link>
               ))}
             </div>
           </div>
@@ -45,9 +51,9 @@ export function SiteFooter() {
             </h2>
             <div className="flex flex-col gap-[12px] text-[16px] font-normal leading-[1.6] tracking-[-0.32px] text-[var(--text-disable-300)]">
               {serviceLinks.map((item) => (
-                <a key={item} href="#">
-                  {item}
-                </a>
+                <Link className="transition-colors hover:text-[var(--text-white-0)]" key={item.label} href={item.href}>
+                  {item.label}
+                </Link>
               ))}
             </div>
           </div>
@@ -58,9 +64,9 @@ export function SiteFooter() {
             </h2>
             <div className="flex flex-col gap-[12px] text-[16px] font-normal leading-[1.6] tracking-[-0.32px] text-[var(--text-disable-300)]">
               {legalLinks.map((item) => (
-                <a key={item} href="#">
-                  {item}
-                </a>
+                <Link className="transition-colors hover:text-[var(--text-white-0)]" key={item.label} href={item.href}>
+                  {item.label}
+                </Link>
               ))}
             </div>
           </div>
@@ -74,6 +80,7 @@ export function SiteFooter() {
                 aria-hidden
                 className="h-10 w-10 sm:h-12 sm:w-12"
                 height={48}
+                sizes="48px"
                 src={copyrightIcon}
                 width={48}
               />

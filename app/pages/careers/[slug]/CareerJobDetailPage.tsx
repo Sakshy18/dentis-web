@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { MotionFadeIn } from "@/components/ui/MotionFadeIn";
 import { getCareerJobBySlug } from "../data/jobs";
 
 type CareerJobDetailPageProps = {
@@ -16,14 +17,14 @@ export function CareerJobDetailPage({ slug }: CareerJobDetailPageProps) {
 
   return (
     <div className="bg-(--background-white-0)">
-      <div className="pointer-events-none fixed left-1/2 top-0 z-50 w-full -translate-x-1/2 sm:top-[32px] sm:w-[calc(100%-40px)] sm:max-w-[1400px]">
+      <div className="pointer-events-none fixed left-1/2 top-0 z-50 w-full -translate-x-1/2 px-[12px] pt-[12px] sm:top-[32px] sm:w-[calc(100%-40px)] sm:max-w-[1400px] sm:px-0 sm:pt-0">
         <div className="pointer-events-auto">
           <SiteHeader mobilePanel />
         </div>
       </div>
 
       <main className="bg-(--background-weak-50) pb-[80px] pt-[120px] sm:pb-[104px] sm:pt-[244px]">
-        <div className="mx-auto w-full max-w-[860px] px-[16px] sm:px-[24px] lg:px-0">
+        <MotionFadeIn className="mx-auto w-full max-w-[860px] px-[16px] sm:px-[24px] lg:px-0">
           <h1 className="text-[48px] font-medium leading-none tracking-[-0.96px] text-(--text-strong-950) sm:text-center">
             {job.title}
           </h1>
@@ -89,7 +90,7 @@ export function CareerJobDetailPage({ slug }: CareerJobDetailPageProps) {
               </p>
             </div>
           </section>
-        </div>
+        </MotionFadeIn>
       </main>
 
       <SiteFooter />

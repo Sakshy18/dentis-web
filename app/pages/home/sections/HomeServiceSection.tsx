@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const serviceItems = [
   {
+    slug: "routine-checkups-cleanings",
     title: "Routine Check-Ups & Cleanings",
     description:
       "Our routine check-ups include a thorough examination to catch any issues early, while gentle cleanings remove plaque and buildup.",
@@ -9,6 +11,7 @@ const serviceItems = [
     imageClass: "object-cover",
   },
   {
+    slug: "whitening-aesthetic-services",
     title: "Whitening & Aesthetic Services",
     description:
       "Whitening and aesthetic treatments are designed to enhance your smile by reducing stains, discoloration, and minor imperfections.",
@@ -16,6 +19,7 @@ const serviceItems = [
     imageClass: "object-cover object-[50%_85%]",
   },
   {
+    slug: "fillings-crowns-restorations",
     title: "Fillings, Crowns & Restorations",
     description:
       "Restorative treatments repair teeth damaged by decay or injury, restoring their strength, function, and natural appearance.",
@@ -23,6 +27,7 @@ const serviceItems = [
     imageClass: "object-cover",
   },
   {
+    slug: "braces-clear-aligners",
     title: "Braces & Clear Aligners",
     description:
       "These treatments help straighten teeth and improve bite alignment. They support better oral health and a more confident smile",
@@ -89,9 +94,9 @@ export function HomeServiceSection() {
                   </p>
                 </div>
 
-                <a
+                <Link
                   className="flex items-center gap-[8px] text-[16px] font-medium leading-[1.6] tracking-[-0.32px] text-[var(--button-primary-base)]"
-                  href="#"
+                  href={`/pages/services/${item.slug}`}
                 >
                   Learn More
                   <span className="flex size-[20px] items-center justify-center">
@@ -104,7 +109,7 @@ export function HomeServiceSection() {
                       width={8}
                     />
                   </span>
-                </a>
+                </Link>
               </div>
             </article>
           ))}

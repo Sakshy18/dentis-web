@@ -5,8 +5,8 @@ import { serviceDetails } from "../data/serviceDetails";
 import { ServiceDetailHeroSection } from "./sections/ServiceDetailHeroSection";
 import { ServiceOverviewSection } from "./sections/ServiceOverviewSection";
 import { ServiceRecommendationsSection } from "./sections/ServiceRecommendationsSection";
-import { WhyChooseUs } from "@/components/ui/WhyChooseUs";
 import { HowItWorksSection } from "@/components/ui/HowItWorksSection";
+import { MotionFadeIn } from "@/components/ui/MotionFadeIn";
 
 type ServiceDetailPageProps = {
   slug: string;
@@ -23,14 +23,18 @@ export function ServiceDetailPage({ slug }: ServiceDetailPageProps) {
 
   return (
     <div className="bg-(--background-white-0)">
-      <div className="pointer-events-none fixed left-1/2 top-0 z-50 w-full -translate-x-1/2 sm:top-[32px] sm:w-[calc(100%-40px)] sm:max-w-[1400px]">
+      <div className="pointer-events-none fixed left-1/2 top-0 z-50 w-full -translate-x-1/2 px-[12px] pt-[12px] sm:top-[32px] sm:w-[calc(100%-40px)] sm:max-w-[1400px] sm:px-0 sm:pt-0">
         <div className="pointer-events-auto">
           <SiteHeader mobilePanel />
         </div>
       </div>
 
       <main className={`bg-(--background-weak-50) pb-[88px] sm:pb-[104px] ${showHero ? "" : "pt-[140px]"}`}>
-        {showHero && service.hero ? <ServiceDetailHeroSection hero={service.hero} /> : null}
+        {showHero && service.hero ? (
+          <MotionFadeIn>
+            <ServiceDetailHeroSection hero={service.hero} />
+          </MotionFadeIn>
+        ) : null}
 
         {!showHero ? (
           <div className="mx-auto flex w-full max-w-[868px] flex-col gap-[32px] px-[20px] sm:px-[40px] lg:px-0">
@@ -48,10 +52,16 @@ export function ServiceDetailPage({ slug }: ServiceDetailPageProps) {
           </div>
         ) : null}
 
-        <ServiceOverviewSection service={service} />
+        <MotionFadeIn delay={0.05}>
+          <ServiceOverviewSection service={service} />
+        </MotionFadeIn>
 
-        <ServiceRecommendationsSection currentService={service} />
-        <HowItWorksSection/>
+        <MotionFadeIn delay={0.1}>
+          <ServiceRecommendationsSection currentService={service} />
+        </MotionFadeIn>
+        <MotionFadeIn delay={0.15}>
+          <HowItWorksSection />
+        </MotionFadeIn>
       </main>
 
       <SiteFooter />

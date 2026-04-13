@@ -12,6 +12,13 @@ const contactIcons = {
   tiktok: "/images/svg/contact-tiktok.svg",
 } as const;
 
+const socialLinks = [
+  { icon: contactIcons.facebook, href: "https://www.facebook.com", label: "Facebook" },
+  { icon: contactIcons.x, href: "https://x.com", label: "X" },
+  { icon: contactIcons.instagram, href: "https://www.instagram.com", label: "Instagram" },
+  { icon: contactIcons.tiktok, href: "https://www.tiktok.com", label: "TikTok" },
+] as const;
+
 type ContactInputProps = {
   id: string;
   label: string;
@@ -55,6 +62,7 @@ function ContactInfoRow({
           aria-hidden
           className={iconClassName}
           height={24}
+          sizes="24px"
           src={icon}
           width={24}
         />
@@ -155,13 +163,16 @@ export function ContactHeroSection() {
                 Stay Connected with Us
               </h2>
               <div className="flex items-center gap-[4px]">
-                {[contactIcons.facebook, contactIcons.x, contactIcons.instagram, contactIcons.tiktok].map((icon) => (
+                {socialLinks.map((item) => (
                   <a
                     className="flex size-[32px] items-center justify-center rounded-[999px] bg-(--background-soft-200)"
-                    href="#"
-                    key={icon}
+                    href={item.href}
+                    key={item.icon}
+                    rel="noreferrer"
+                    target="_blank"
+                    aria-label={item.label}
                   >
-                    <Image alt="" aria-hidden height={16} src={icon} width={16} />
+                    <Image alt="" aria-hidden height={16} sizes="16px" src={item.icon} width={16} />
                   </a>
                 ))}
               </div>
