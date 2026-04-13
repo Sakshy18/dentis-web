@@ -1,4 +1,9 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { Calendar } from "@/components/layout/Calendar";
 
 const scheduleImage = "/images/png/home-schedule-image.jpg";
 const scheduleLogo = "/images/svg/home-schedule-logo.svg";
@@ -56,17 +61,63 @@ function FieldLabel({ children }: { children: string }) {
   );
 }
 
-export function ScheduleSection() {
+type ScheduleSectionProps = {
+  ctaHref?: string;
+  ctaLabel?: string;
+};
+
+const treatmentOptions = [
+  "Routine Check-Ups & Cleanings",
+  "Whitening & Aesthetic Services",
+  "Fillings, Crowns & Restorations",
+  "Braces & Clear Aligners",
+] as const;
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+export function ScheduleSection({
+  ctaHref = "/pages/services/schedule-appointment",
+  ctaLabel = "Book a Schedule",
+}: ScheduleSectionProps) {
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [isTreatmentOpen, setIsTreatmentOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedTreatment, setSelectedTreatment] = useState<string | null>(null);
+  const calendarWrapperRef = useRef<HTMLDivElement>(null);
+  const treatmentWrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isCalendarOpen && !isTreatmentOpen) return;
+
+    const onPointerDown = (event: MouseEvent) => {
+      if (!calendarWrapperRef.current?.contains(event.target as Node)) {
+        setIsCalendarOpen(false);
+      }
+      if (!treatmentWrapperRef.current?.contains(event.target as Node)) {
+        setIsTreatmentOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", onPointerDown);
+    return () => document.removeEventListener("mousedown", onPointerDown);
+  }, [isCalendarOpen, isTreatmentOpen]);
+
   return (
     <section className="bg-[var(--background-weak-50)] px-[16px] py-[40px] sm:px-[20px] sm:py-[56px] lg:px-[16px] lg:py-[40px]">
-      <div className="mx-auto overflow-hidden rounded-[16px] bg-[var(--background-white-0)] p-[20px] sm:p-[32px] lg:max-w-[1408px] lg:p-[48px]">
-        <div className="grid gap-[24px] lg:grid-cols-[700px_minmax(0,1fr)] lg:gap-[56px]">
-          <div className="relative h-[420px] overflow-hidden rounded-[16px] bg-[var(--primary-800)] sm:h-[520px] lg:h-[622px]">
+      <div className="mx-auto rounded-[16px] bg-[var(--background-white-0)] p-[20px] sm:p-[32px] lg:max-w-[1408px] lg:p-[48px]">
+        <div className="grid gap-[24px] xl:grid-cols-[700px_minmax(0,1fr)] xl:gap-[56px]">
+          <div className="relative h-[420px] overflow-hidden rounded-[16px] bg-[var(--primary-800)] sm:h-[520px] xl:h-[622px]">
             <Image
               alt="Dental visit"
               className="h-full w-full -scale-x-100 object-cover"
               fill
-              sizes="(max-width: 1024px) 100vw, 700px"
+              sizes="(max-width: 1279px) 100vw, 700px"
               src={scheduleImage}
             />
             <div className="absolute inset-0 bg-black/20" />
@@ -111,40 +162,90 @@ export function ScheduleSection() {
                 />
               </div>
 
-              <div className="flex flex-col gap-[4px]">
+              <div className="relative flex flex-col gap-[4px]" ref={calendarWrapperRef}>
                 <FieldLabel>Date</FieldLabel>
-                <div className="relative">
-                  <input
-                    className="h-[44px] w-full rounded-[8px] border border-[var(--stroke-soft-200)] px-[12px] pr-[40px] text-[14px] font-normal leading-[1.6] tracking-[-0.28px] text-[var(--text-strong-950)] placeholder:text-[var(--text-soft-400)] focus:border-[var(--primary-700)] focus:outline-none"
-                    placeholder="Select your preferred date"
-                    type="text"
-                  />
+                <button
+                  aria-expanded={isCalendarOpen}
+                  className="relative h-[44px] w-full rounded-[8px] border border-[var(--stroke-soft-200)] px-[12px] pr-[40px] text-left text-[14px] font-normal leading-[1.6] tracking-[-0.28px] text-[var(--text-strong-950)] focus:border-[var(--primary-700)] focus:outline-none"
+                  onClick={() => setIsCalendarOpen((prev) => !prev)}
+                  type="button"
+                >
+                  <span className={selectedDate ? "text-[var(--text-strong-950)]" : "text-[var(--text-soft-400)]"}>
+                    {selectedDate ? formatDate(selectedDate) : "Select your preferred date"}
+                  </span>
                   <span className="pointer-events-none absolute right-[12px] top-1/2 -translate-y-1/2">
                     <CalendarIcon />
                   </span>
-                </div>
+                </button>
+                <input name="appointmentDate" type="hidden" value={selectedDate ? selectedDate.toISOString() : ""} />
+                {isCalendarOpen ? (
+                  <div className="mt-[8px] sm:absolute sm:left-0 sm:right-0 sm:top-[calc(100%+8px)] sm:mt-0 sm:z-30">
+                    <Calendar
+                      initialMonth={new Date(2026, 0, 1)}
+                      onChange={(date) => {
+                        setSelectedDate(date);
+                        setIsCalendarOpen(false);
+                      }}
+                      value={selectedDate}
+                    />
+                  </div>
+                ) : null}
               </div>
 
-              <div className="flex flex-col gap-[4px]">
+              <div className="relative flex flex-col gap-[4px]" ref={treatmentWrapperRef}>
                 <FieldLabel>Treatment</FieldLabel>
-                <div className="relative">
-                  <input
-                    className="h-[44px] w-full rounded-[8px] border border-[var(--stroke-soft-200)] px-[12px] pr-[40px] text-[14px] font-normal leading-[1.6] tracking-[-0.28px] text-[var(--text-strong-950)] placeholder:text-[var(--text-soft-400)] focus:border-[var(--primary-700)] focus:outline-none"
-                    placeholder="Select your treatment"
-                    type="text"
-                  />
+                <button
+                  aria-expanded={isTreatmentOpen}
+                  className="relative h-[44px] w-full rounded-[8px] border border-[var(--stroke-soft-200)] px-[12px] pr-[40px] text-left text-[14px] font-normal leading-[1.6] tracking-[-0.28px] text-[var(--text-strong-950)] focus:border-[var(--primary-700)] focus:outline-none"
+                  onClick={() => setIsTreatmentOpen((prev) => !prev)}
+                  type="button"
+                >
+                  <span className={selectedTreatment ? "text-[var(--text-strong-950)]" : "text-[var(--text-soft-400)]"}>
+                    {selectedTreatment ?? "Select your treatment"}
+                  </span>
                   <span className="pointer-events-none absolute right-[12px] top-1/2 -translate-y-1/2">
                     <CaretDownIcon />
                   </span>
-                </div>
+                </button>
+                <input name="treatment" type="hidden" value={selectedTreatment ?? ""} />
+                {isTreatmentOpen ? (
+                  <div className="absolute left-0 right-0 top-[calc(100%+8px)] z-30 rounded-[10px] border border-[var(--stroke-soft-200)] bg-[var(--background-white-0)] p-[4px] shadow-[0_8px_24px_rgba(14,18,27,0.08)]">
+                    {treatmentOptions.map((option) => (
+                      <button
+                        className={`w-full rounded-[8px] px-[12px] py-[10px] text-left text-[14px] font-normal leading-[1.6] tracking-[-0.28px] ${
+                          option === selectedTreatment
+                            ? "bg-[var(--background-weak-50)] text-[var(--text-strong-950)]"
+                            : "text-[var(--text-sub-500)] hover:bg-[var(--background-weak-50)]"
+                        }`}
+                        key={option}
+                        onClick={() => {
+                          setSelectedTreatment(option);
+                          setIsTreatmentOpen(false);
+                        }}
+                        type="button"
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
               </div>
 
-              <button
-                className="mt-[14px] h-[48px] w-full rounded-[99999px] bg-[var(--button-primary-base)] text-[16px] font-medium leading-[1.6] tracking-[-0.32px] text-[var(--text-white-0)]"
-                type="button"
-              >
-                Book a Schedule
-              </button>
+              {ctaHref ? (
+                <Link
+                  className="mt-[14px] flex h-[48px] w-full items-center justify-center rounded-[99999px] bg-[var(--button-primary-base)] text-[16px] font-medium leading-[1.6] tracking-[-0.32px] text-[var(--text-white-0)]"
+                  href={ctaHref}
+                >
+                  {ctaLabel}
+                </Link>
+              ) : (
+                <button
+                  className="mt-[14px] h-[48px] w-full rounded-[99999px] bg-[var(--button-primary-base)] text-[16px] font-medium leading-[1.6] tracking-[-0.32px] text-[var(--text-white-0)]"
+                  type="button"
+                >
+                  {ctaLabel}
+                </button>
+              )}
             </form>
           </div>
         </div>

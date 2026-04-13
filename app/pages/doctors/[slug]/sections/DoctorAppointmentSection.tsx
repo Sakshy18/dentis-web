@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Calendar } from "@/components/layout/Calendar";
+import { formatSlotRange } from "@/app/utils/dateTime";
 import type { DoctorProfile } from "../../data/doctors";
 
 type DoctorAppointmentSectionProps = {
@@ -40,24 +42,6 @@ function formatDate(date: Date) {
   });
 }
 
-function formatSlotRange(time: string) {
-  const [hourPart, minutePart] = time.split(":");
-  const hour = Number(hourPart);
-  const minute = Number(minutePart);
-
-  const start = new Date(2026, 0, 1, hour, minute);
-  const end = new Date(2026, 0, 1, hour, minute + 60);
-
-  const formatClock = (date: Date) => {
-    const hours24 = date.getHours();
-    const hours12 = hours24 % 12 === 0 ? 12 : hours24 % 12;
-    return `${String(hours12).padStart(2, "0")}.${String(date.getMinutes()).padStart(2, "0")}`;
-  };
-
-  const meridiem = end.getHours() < 12 ? "am" : "pm";
-  return `${formatClock(start)} - ${formatClock(end)} ${meridiem}`;
-}
-
 export function DoctorAppointmentSection({ doctor }: DoctorAppointmentSectionProps) {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date(2026, 0, 14));
@@ -75,6 +59,14 @@ export function DoctorAppointmentSection({ doctor }: DoctorAppointmentSectionPro
     () => doctor.appointmentSlots.filter((slot) => Number(slot.time.split(":")[0]) >= 12),
     [doctor.appointmentSlots],
   );
+  const confirmAppointmentHref = useMemo(() => {
+    const params = new URLSearchParams({
+      doctor: doctor.name,
+      date: selectedDate.toISOString(),
+      slot: selectedSlot,
+    });
+    return `/pages/services/schedule-appointment?${params.toString()}`;
+  }, [doctor.name, selectedDate, selectedSlot]);
 
   useEffect(() => {
     const onPointerDown = (event: MouseEvent) => {
@@ -137,15 +129,14 @@ export function DoctorAppointmentSection({ doctor }: DoctorAppointmentSectionPro
                 <p className="mb-[8px] text-[14px] font-medium leading-[1.6] tracking-[-0.28px] text-(--text-sub-500)">
                   Morning
                 </p>
-                <div className="-mx-[2px] overflow-x-auto px-[2px]">
-                  <div className="flex w-max gap-[10px]">
+                <div className="flex flex-wrap gap-[10px]">
                   {morningSlots.map((slot) => {
                     const isSelected = selectedSlot === slot.time;
                     const isDisabled = slot.status === "disabled";
 
                     return (
                       <button
-                        className={`h-[48px] w-[152px] shrink-0 rounded-[8px] border px-[16px] text-[14px] font-normal leading-[1.6] tracking-[-0.28px] ${
+                        className={`h-[48px] w-[152px] rounded-[8px] border px-[16px] text-[14px] font-normal leading-[1.6] tracking-[-0.28px] ${
                           isDisabled
                             ? "cursor-not-allowed border-(--background-soft-200) bg-(--background-soft-200) text-(--text-sub-500)"
                             : isSelected
@@ -161,7 +152,6 @@ export function DoctorAppointmentSection({ doctor }: DoctorAppointmentSectionPro
                       </button>
                     );
                   })}
-                  </div>
                 </div>
               </div>
 
@@ -169,15 +159,14 @@ export function DoctorAppointmentSection({ doctor }: DoctorAppointmentSectionPro
                 <p className="mb-[8px] text-[14px] font-medium leading-[1.6] tracking-[-0.28px] text-(--text-sub-500)">
                   Afternoon
                 </p>
-                <div className="-mx-[2px] overflow-x-auto px-[2px]">
-                  <div className="flex w-max gap-[10px]">
+                <div className="flex flex-wrap gap-[10px]">
                   {afternoonSlots.map((slot) => {
                     const isSelected = selectedSlot === slot.time;
                     const isDisabled = slot.status === "disabled";
 
                     return (
                       <button
-                        className={`h-[48px] w-[152px] shrink-0 rounded-[8px] border px-[16px] text-[14px] font-normal leading-[1.6] tracking-[-0.28px] ${
+                        className={`h-[48px] w-[152px] rounded-[8px] border px-[16px] text-[14px] font-normal leading-[1.6] tracking-[-0.28px] ${
                           isDisabled
                             ? "cursor-not-allowed border-(--background-soft-200) bg-(--background-soft-200) text-(--text-sub-500)"
                             : isSelected
@@ -193,18 +182,17 @@ export function DoctorAppointmentSection({ doctor }: DoctorAppointmentSectionPro
                       </button>
                     );
                   })}
-                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <button
-            className="mt-[8px] h-[52px] w-full rounded-[99999px] bg-(--button-primary-base) text-[16px] font-medium leading-[1.6] tracking-[-0.32px] text-(--text-white-0) sm:w-auto sm:min-w-[280px]"
-            type="button"
+          <Link
+            className="mt-[8px] flex h-[52px] w-full items-center justify-center rounded-[99999px] bg-(--button-primary-base) text-[16px] font-medium leading-[1.6] tracking-[-0.32px] text-(--text-white-0) sm:w-auto sm:min-w-[280px]"
+            href={confirmAppointmentHref}
           >
             Confirm Appointment
-          </button>
+          </Link>
         </div>
       </div>
     </section>
