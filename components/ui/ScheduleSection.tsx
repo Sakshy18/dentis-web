@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Calendar } from "@/components/layout/Calendar";
+import { isValidEmail } from "@/app/utils/validation";
 
 const scheduleImage = "/images/png/home-schedule-image.jpg";
 const scheduleLogo = "/images/svg/home-schedule-logo.svg";
@@ -89,8 +90,10 @@ export function ScheduleSection({
   const [isTreatmentOpen, setIsTreatmentOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTreatment, setSelectedTreatment] = useState<string | null>(null);
+  const [email, setEmail] = useState("");
   const calendarWrapperRef = useRef<HTMLDivElement>(null);
   const treatmentWrapperRef = useRef<HTMLDivElement>(null);
+  const emailInvalid = email.trim().length > 0 && !isValidEmail(email);
 
   useEffect(() => {
     if (!isCalendarOpen && !isTreatmentOpen) return;
@@ -156,10 +159,18 @@ export function ScheduleSection({
               <div className="flex flex-col gap-[4px]">
                 <FieldLabel>E-mail</FieldLabel>
                 <input
-                  className="h-[44px] rounded-[8px] border border-[var(--stroke-soft-200)] px-[12px] text-[14px] font-normal leading-[1.6] tracking-[-0.28px] text-[var(--text-strong-950)] placeholder:text-[var(--text-soft-400)] focus:border-[var(--primary-700)] focus:outline-none"
+                  aria-invalid={emailInvalid}
+                  className={`h-[44px] rounded-[8px] border px-[12px] text-[14px] font-normal leading-[1.6] tracking-[-0.28px] text-[var(--text-strong-950)] placeholder:text-[var(--text-soft-400)] focus:border-[var(--primary-700)] focus:outline-none ${
+                    emailInvalid ? "border-[#DC2626]" : "border-[var(--stroke-soft-200)]"
+                  }`}
+                  onChange={(event) => setEmail(event.target.value)}
                   placeholder="Put your email here"
                   type="email"
+                  value={email}
                 />
+                {emailInvalid ? (
+                  <p className="text-[12px] font-normal leading-normal tracking-[-0.24px] text-[#DC2626]">Enter valid email</p>
+                ) : null}
               </div>
 
               <div className="relative flex flex-col gap-[4px]" ref={calendarWrapperRef}>

@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
+import { isValidEmail } from "@/app/utils/validation";
 import type { BlogPost } from "../../data/blogPosts";
 
 const shareIcon = "/images/svg/blog-share-figma.svg";
@@ -20,8 +24,11 @@ type BlogDetailContentSectionProps = {
 };
 
 export function BlogDetailContentSection({ post }: BlogDetailContentSectionProps) {
+  const [subscriberEmail, setSubscriberEmail] = useState("");
   const intro = post.content[0] ?? post.excerpt;
   const detailParagraphs = Array.from({ length: 3 }, (_, index) => post.content[index + 1] ?? post.excerpt);
+  const subscriberEmailInvalid =
+    subscriberEmail.trim().length > 0 && !isValidEmail(subscriberEmail);
 
   return (
     <section className="px-[12px] pb-[72px] pt-[40px] sm:px-[20px] sm:pb-[104px] sm:pt-[64px]">
@@ -58,19 +65,31 @@ export function BlogDetailContentSection({ post }: BlogDetailContentSectionProps
                 <label className="sr-only" htmlFor="blog-detail-subscribe-email">
                   Enter your email
                 </label>
-                <div className="flex items-center gap-[8px] rounded-[8px] border border-(--stroke-soft-200) bg-(--background-white-0) p-[8px] pl-[16px] sm:pl-[24px]">
-                  <input
-                    className="w-full bg-transparent text-[14px] font-normal leading-[1.6] tracking-[-0.28px] text-(--text-soft-400) outline-none"
-                    id="blog-detail-subscribe-email"
-                    placeholder="Enter your email"
-                    type="email"
-                  />
-                  <button
-                    className="shrink-0 rounded-[99999px] bg-(--button-primary-base) px-[18px] py-[9px] text-[14px] font-medium leading-[1.6] tracking-[-0.28px] text-(--text-white-0)"
-                    type="button"
+                <div className="flex flex-col gap-[6px]">
+                  <div
+                    className={`flex items-center gap-[8px] rounded-[8px] border bg-(--background-white-0) p-[8px] pl-[16px] sm:pl-[24px] ${
+                      subscriberEmailInvalid ? "border-[#DC2626]" : "border-(--stroke-soft-200)"
+                    }`}
                   >
-                    Subscribe
-                  </button>
+                    <input
+                      aria-invalid={subscriberEmailInvalid}
+                      className="w-full bg-transparent text-[14px] font-normal leading-[1.6] tracking-[-0.28px] text-(--text-soft-400) outline-none"
+                      id="blog-detail-subscribe-email"
+                      onChange={(event) => setSubscriberEmail(event.target.value)}
+                      placeholder="Enter your email"
+                      type="email"
+                      value={subscriberEmail}
+                    />
+                    <button
+                      className="shrink-0 rounded-[99999px] bg-(--button-primary-base) px-[18px] py-[9px] text-[14px] font-medium leading-[1.6] tracking-[-0.28px] text-(--text-white-0)"
+                      type="button"
+                    >
+                      Subscribe
+                    </button>
+                  </div>
+                  {subscriberEmailInvalid ? (
+                    <p className="text-[12px] font-normal leading-normal tracking-[-0.24px] text-[#DC2626]">Enter valid email</p>
+                  ) : null}
                 </div>
               </div>
             </div>

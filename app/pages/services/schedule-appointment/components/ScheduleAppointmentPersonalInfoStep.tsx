@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { isValidEmail } from "@/app/utils/validation";
 import {
   PersonalInput,
   PersonalTextArea,
@@ -37,6 +38,13 @@ export function ScheduleAppointmentPersonalInfoStep({
   onPrevious,
   onBook,
 }: ScheduleAppointmentPersonalInfoStepProps) {
+  const newPatientEmailInvalid =
+    isNewPatient && newPatientInfo.email.trim().length > 0 && !isValidEmail(newPatientInfo.email);
+  const existingPatientEmailInvalid =
+    !isNewPatient &&
+    existingPatientInfo.email.trim().length > 0 &&
+    !isValidEmail(existingPatientInfo.email);
+
   return (
     <div className="mt-[24px] space-y-[40px] lg:mt-[32px]">
       <div className="rounded-[15px] bg-(--background-white-0) p-[24px]">
@@ -78,6 +86,7 @@ export function ScheduleAppointmentPersonalInfoStep({
             placeholder="Put your email here"
             type="email"
             value={newPatientInfo.email}
+            errorMessage={newPatientEmailInvalid ? "Enter valid email" : undefined}
           />
 
           <div className="grid gap-[16px] sm:grid-cols-2">
@@ -111,6 +120,7 @@ export function ScheduleAppointmentPersonalInfoStep({
               placeholder="Put your email here"
               type="email"
               value={existingPatientInfo.email}
+              errorMessage={existingPatientEmailInvalid ? "Enter valid email" : undefined}
             />
             <PersonalInput
               label="Date of Birth"

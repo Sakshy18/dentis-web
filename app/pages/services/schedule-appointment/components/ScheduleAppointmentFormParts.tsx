@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { formatSlotRange } from "@/app/utils/dateTime";
+import { isValidEmail } from "@/app/utils/validation";
 import { caretDownIcon, logoMark } from "./constants";
 import type { TimeSlot } from "./types";
 
@@ -213,23 +214,34 @@ export function PersonalInput({
   placeholder,
   onChange,
   type = "text",
+  errorMessage,
 }: {
   label: string;
   value: string;
   placeholder: string;
   onChange: (value: string) => void;
   type?: "text" | "email" | "date";
+  errorMessage?: string;
 }) {
+  const emailInvalid = type === "email" && value.trim().length > 0 && !isValidEmail(value);
+  const resolvedErrorMessage = errorMessage ?? (emailInvalid ? "Enter valid email" : undefined);
+
   return (
     <div className="flex flex-col gap-[4px]">
       <p className="text-[14px] font-medium leading-[1.6] tracking-[-0.28px] text-(--text-strong-950)">{label}</p>
       <input
-        className="h-[44px] rounded-[8px] border border-(--stroke-soft-200) bg-(--background-white-0) px-[12px] text-[14px] font-normal leading-[1.6] tracking-[-0.28px] text-(--text-strong-950) placeholder:text-(--text-soft-400) focus:border-(--button-primary-base) focus:outline-none"
+        aria-invalid={Boolean(resolvedErrorMessage)}
+        className={`h-[44px] rounded-[8px] border bg-(--background-white-0) px-[12px] text-[14px] font-normal leading-[1.6] tracking-[-0.28px] text-(--text-strong-950) placeholder:text-(--text-soft-400) focus:border-(--button-primary-base) focus:outline-none ${
+          resolvedErrorMessage ? "border-[#DC2626]" : "border-(--stroke-soft-200)"
+        }`}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
         type={type}
         value={value}
       />
+      {resolvedErrorMessage ? (
+        <p className="text-[12px] font-normal leading-normal tracking-[-0.24px] text-[#DC2626]">{resolvedErrorMessage}</p>
+      ) : null}
     </div>
   );
 }

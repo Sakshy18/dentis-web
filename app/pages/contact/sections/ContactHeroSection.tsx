@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
+import { isValidEmail } from "@/app/utils/validation";
 
 const contactIcons = {
   phone: "/images/svg/contact-phone.svg",
@@ -73,6 +76,9 @@ function ContactInfoRow({
 }
 
 export function ContactHeroSection() {
+  const [email, setEmail] = useState("");
+  const emailInvalid = email.trim().length > 0 && !isValidEmail(email);
+
   return (
     <section className="bg-(--background-weak-50) px-[16px] pb-[40px] pt-[100px] sm:px-[40px] sm:pb-[104px] sm:pt-[160px]">
       <div className="mx-auto w-full max-w-[1312px]">
@@ -92,7 +98,28 @@ export function ContactHeroSection() {
               <ContactInput id="first-name" label="First Name" placeholder="Put your first name here" />
               <ContactInput id="last-name" label="Last Name" placeholder="Put your last name here" />
             </div>
-            <ContactInput id="email" label="E-mail" placeholder="Put your email here" type="email" />
+            <div className="flex flex-col gap-[4px]">
+              <label
+                className="text-[14px] font-medium leading-[1.6] tracking-[-0.28px] text-(--text-strong-950)"
+                htmlFor="email"
+              >
+                E-mail
+              </label>
+              <input
+                aria-invalid={emailInvalid}
+                className={`h-[48px] rounded-[8px] border bg-(--background-white-0) px-[12px] text-[14px] font-normal leading-[1.6] tracking-[-0.28px] text-(--text-strong-950) placeholder:text-(--text-soft-400) focus:border-(--primary-700) focus:outline-none ${
+                  emailInvalid ? "border-[#DC2626]" : "border-(--stroke-soft-200)"
+                }`}
+                id="email"
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder="Put your email here"
+                type="email"
+                value={email}
+              />
+              {emailInvalid ? (
+                <p className="text-[12px] font-normal leading-normal tracking-[-0.24px] text-[#DC2626]">Enter valid email</p>
+              ) : null}
+            </div>
 
             <div className="flex flex-col gap-[4px]">
               <label
