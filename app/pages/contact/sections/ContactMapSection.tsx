@@ -11,6 +11,7 @@ export function ContactMapSection() {
             alt="Map near Dentis clinic"
             className="object-cover"
             fill
+            loading="eager"
             sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1024px) calc(100vw - 80px), 1312px"
             src={contactMapImage}
           />

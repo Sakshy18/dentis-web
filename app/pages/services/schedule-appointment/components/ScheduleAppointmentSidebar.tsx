@@ -59,6 +59,7 @@ export function ScheduleAppointmentSidebar() {
               alt="Map near Dentis clinic"
               className="object-cover object-center"
               fill
+              loading="eager"
               sizes="(max-width: 1023px) 100vw, 404px"
               src={mapImage}
             />
